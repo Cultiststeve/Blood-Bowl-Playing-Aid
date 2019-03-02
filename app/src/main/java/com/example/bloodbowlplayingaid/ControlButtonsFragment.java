@@ -69,7 +69,7 @@ public class ControlButtonsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fragment__button__draw, container, false);
+        return inflater.inflate(R.layout.fragment_button__panel, container, false);
     }
 
     @Override

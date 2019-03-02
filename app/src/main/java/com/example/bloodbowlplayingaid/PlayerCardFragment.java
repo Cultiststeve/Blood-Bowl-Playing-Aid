@@ -78,7 +78,7 @@ public class PlayerCardFragment extends Fragment {
                              Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView() called with: inflater = [" + inflater + "], container = [" + container + "], savedInstanceState = [" + savedInstanceState + "]");
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.player_card_fragment, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_player_card, container, false);
 
         card_button = rootView.findViewById(R.id.card_button); // Get button, store in fragment variable
 
