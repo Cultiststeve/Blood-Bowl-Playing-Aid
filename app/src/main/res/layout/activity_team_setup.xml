@@ -13,13 +13,13 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:onClick="onBtnPlayPress"
+        android:onClick="onBtnPlayGame"
         android:text="Play Game"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/edtTxtPlayerInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -55,7 +55,7 @@
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button"
-        app:layout_constraintStart_toEndOf="@+id/editText"
+        app:layout_constraintStart_toEndOf="@+id/edtTxtPlayerInput"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -65,6 +65,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:onClick="onBtnAddMember"
         android:text="Add"
         app:layout_constraintEnd_toStartOf="@+id/recylerViewTeam"
         app:layout_constraintTop_toTopOf="parent" />

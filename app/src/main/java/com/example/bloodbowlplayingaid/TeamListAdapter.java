@@ -5,9 +5,11 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.List;
+
 public class TeamListAdapter extends RecyclerView.Adapter<TeamListAdapter.TeamViewHolder> {
 
-    private String[] teamDataset;
+    private List<String> teamDataset;
 
     public static class TeamViewHolder extends RecyclerView.ViewHolder {
         // Each data item is a string
@@ -21,7 +23,7 @@ public class TeamListAdapter extends RecyclerView.Adapter<TeamListAdapter.TeamVi
     }
 
     // Constuctor that takes team member list
-    public TeamListAdapter(String[] newDataset) {
+    public TeamListAdapter(List<String> newDataset) {
         teamDataset = newDataset;
     }
 
@@ -38,12 +40,12 @@ public class TeamListAdapter extends RecyclerView.Adapter<TeamListAdapter.TeamVi
     @Override
     public void onBindViewHolder(TeamViewHolder holder, int position) {
         // Replace text of element with data at that position
-        holder.teamMemberTextView.setText(teamDataset[position]);
+        holder.teamMemberTextView.setText(teamDataset.get(position));
     }
 
     // Return size of dataset
     @Override
     public int getItemCount() {
-        return teamDataset.length;
+        return teamDataset.size();
     }
 }
