@@ -4,9 +4,11 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 
 /**
@@ -20,11 +22,14 @@ import android.view.ViewGroup;
 public class PlayerCardFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
+    private static final String TAG = "BBH_PlayerCardFragment";
+    private static final String ARG_PARAM1 = "Button Number";
     private static final String ARG_PARAM2 = "param2";
 
+    private Button card_button;
+
     // TODO: Rename and change types of parameters
-    private String mParam1;
+    private Integer card_number;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
@@ -37,15 +42,17 @@ public class PlayerCardFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
+     * @param card_number Parameter 1.
      * @param param2 Parameter 2.
      * @return A new instance of fragment PlayerCardFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static PlayerCardFragment newInstance(String param1, String param2) {
+    public static PlayerCardFragment newInstance(Integer card_number, String param2) {
+        Log.d(TAG, "newInstance() called with: card_number = [" + card_number + "], param2 = [" + param2 + "]");
+
         PlayerCardFragment fragment = new PlayerCardFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
+        args.putInt(ARG_PARAM1, card_number);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
@@ -53,24 +60,48 @@ public class PlayerCardFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate() called with: savedInstanceState = [" + savedInstanceState + "]");
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
+            card_number = getArguments().getInt(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.d(TAG, "onCreateView() called with: inflater = [" + inflater + "], container = [" + container + "], savedInstanceState = [" + savedInstanceState + "]");
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.player_card_fragment, container, false);
+        View rootView = inflater.inflate(R.layout.player_card_fragment, container, false);
+
+        card_button = rootView.findViewById(R.id.card_button); // Get button, store in fragment variable
+
+
+
+        return rootView;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+    @Override
+    public void onStart() {
+        Log.d(TAG, "onStart() called");
+        super.onStart();
+
+        card_button.setOnClickListener(new View.OnClickListener() { // Set button behaviour
+            @Override
+            public void onClick(View v) {
+                //TODO set button behaviour
+                card_button.setText("pressed");
+            }
+        });
+
+        if (card_number != null){
+            Log.d(TAG, "OnStart: Setting button text to " + card_number.toString());
+            card_button.setText(card_number.toString());
+        } else{
+            Log.d(TAG, "onStart: No card number");
+            card_button.setText("Error occured");
         }
     }
 
