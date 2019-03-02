@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 
@@ -76,7 +77,7 @@ public class ControlButtonsFragment extends Fragment {
         Log.d(TAG, "onStart() called");
         super.onStart();
 
-        Button turn_button = getView().findViewById(R.id.btn_Turn_Count);
+        Button turn_button = getView().findViewById(R.id.btnTurnCount);
 
         turn_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +92,14 @@ public class ControlButtonsFragment extends Fragment {
             public boolean onLongClick(View v) {
                 mListener.reduceTurn();
                 return false;
+            }
+        });
+
+        ImageButton closeImageButton = getView().findViewById(R.id.btnCloseGame);
+        closeImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.closeIngame();
             }
         });
     }
@@ -124,6 +133,7 @@ public class ControlButtonsFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void reduceTurn();
+        void closeIngame();
     }
 
 
@@ -137,7 +147,7 @@ public class ControlButtonsFragment extends Fragment {
         } else {
             new_turn_display = new_turn;
         }
-        Button turn_button = getView().findViewById(R.id.btn_Turn_Count);
+        Button turn_button = getView().findViewById(R.id.btnTurnCount);
         turn_button.setText(new_turn_display.toString());
     }
 }

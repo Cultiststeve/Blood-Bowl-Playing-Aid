@@ -24,13 +24,13 @@ public class PlayerCardFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String TAG = "BBH_PlayerCardFragment";
-    private static final String ARG_PARAM1 = "FRAGMENT_NUMBER";
+    private static final String ARG_PARAM1 = "CARD_POSITION";
     private static final String ARG_PARAM2 = "param2";
 
     private Button card_button;
 
     // TODO: Rename and change types of parameters
-    private Integer card_number;
+    private Integer card_position;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
@@ -51,7 +51,7 @@ public class PlayerCardFragment extends Fragment {
      */
     // TODO: Rename and change types and number of parameters
     public static PlayerCardFragment newInstance(Integer card_number, String param2) {
-        Log.d(TAG, "newInstance() called with: card_number = [" + card_number + "], param2 = [" + param2 + "]");
+        Log.d(TAG, "newInstance() called with: card_position = [" + card_number + "], param2 = [" + param2 + "]");
 
         PlayerCardFragment fragment = new PlayerCardFragment();
         Bundle args = new Bundle();
@@ -67,7 +67,7 @@ public class PlayerCardFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             Log.d(TAG, "onCreate: Setting card number to " + getArguments().getInt(ARG_PARAM1));
-            card_number = getArguments().getInt(ARG_PARAM1);
+            card_position = getArguments().getInt(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
@@ -82,10 +82,10 @@ public class PlayerCardFragment extends Fragment {
 
         card_button = rootView.findViewById(R.id.card_button); // Get button, store in fragment variable
 
-        if (card_number != null){
-            Integer display_num  = card_number+1;
+        if (card_position != null){
+            Integer display_num  = card_position +1;
             card_button.setText("Player " + (display_num).toString());
-            Log.d(TAG, "onCreateView: cardnum = " + card_number.toString());
+            Log.d(TAG, "onCreateView: cardnum = " + card_position.toString());
         } else {
             Log.d(TAG, "onCreateView: Card num is null");
         }
@@ -110,6 +110,8 @@ public class PlayerCardFragment extends Fragment {
                 }
             }
         });
+
+        //TODO long press to make not played
     }
 
     @Override

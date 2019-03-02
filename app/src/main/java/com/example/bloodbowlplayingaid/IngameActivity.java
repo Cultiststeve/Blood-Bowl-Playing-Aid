@@ -1,5 +1,6 @@
 package com.example.bloodbowlplayingaid;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentTransaction;
@@ -26,7 +27,7 @@ public class IngameActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_ingame);
 
         // Set buttons to player names
         player_card_views.add(0, findViewById(R.id.player_1_card));
@@ -88,6 +89,13 @@ public class IngameActivity extends AppCompatActivity
         }
         current_turn--;
         update_fragment_turns();
+    }
+
+    @Override
+    public void closeIngame() {
+        // Control button fragment button to close has been pressed. Do the thing
+        Intent intent = new Intent(this, TeamSetupActivity.class);
+        startActivity(intent);
     }
 
     private void update_fragment_turns(){
