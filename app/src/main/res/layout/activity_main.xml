@@ -6,9 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".Ingame_Activity">
 
-    <fragment
+    <FrameLayout
         android:id="@+id/player_1_card"
-        android:name="com.example.bloodbowlplayingaid.PlayerCardFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -23,9 +22,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <fragment
+    <FrameLayout
         android:id="@+id/player_2_card"
-        android:name="com.example.bloodbowlplayingaid.PlayerCardFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -40,9 +38,8 @@
         app:layout_constraintStart_toEndOf="@id/player_1_card"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <fragment
+    <FrameLayout
         android:id="@+id/player_3_card"
-        android:name="com.example.bloodbowlplayingaid.PlayerCardFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -56,9 +53,8 @@
         app:layout_constraintStart_toEndOf="@id/player_2_card"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <fragment
+    <FrameLayout
         android:id="@+id/player_4_card"
-        android:name="com.example.bloodbowlplayingaid.PlayerCardFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -72,9 +68,8 @@
         app:layout_constraintStart_toEndOf="@+id/player_3_card"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <fragment
+    <FrameLayout
         android:id="@+id/player_5_card"
-        android:name="com.example.bloodbowlplayingaid.PlayerCardFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -88,9 +83,8 @@
         app:layout_constraintStart_toEndOf="@+id/player_4_card"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <fragment
+    <FrameLayout
         android:id="@+id/player_6_card"
-        android:name="com.example.bloodbowlplayingaid.PlayerCardFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -104,9 +98,8 @@
         app:layout_constraintStart_toEndOf="@+id/player_5_card"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <fragment
+    <FrameLayout
         android:id="@+id/player_7_card"
-        android:name="com.example.bloodbowlplayingaid.PlayerCardFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -121,9 +114,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/player_1_card" />
 
-    <fragment
+    <FrameLayout
         android:id="@+id/player_8_card"
-        android:name="com.example.bloodbowlplayingaid.PlayerCardFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -139,9 +131,8 @@
         app:layout_constraintTop_toBottomOf="@+id/player_2_card"
         app:layout_constraintVertical_bias="0.0" />
 
-    <fragment
+    <FrameLayout
         android:id="@+id/player_9_card"
-        android:name="com.example.bloodbowlplayingaid.PlayerCardFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -156,9 +147,8 @@
         app:layout_constraintStart_toEndOf="@id/player_8_card"
         app:layout_constraintTop_toBottomOf="@+id/player_3_card" />
 
-    <fragment
+    <FrameLayout
         android:id="@+id/player_10_card"
-        android:name="com.example.bloodbowlplayingaid.PlayerCardFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -173,9 +163,8 @@
         app:layout_constraintStart_toEndOf="@id/player_9_card"
         app:layout_constraintTop_toBottomOf="@+id/player_4_card" />
 
-    <fragment
+    <FrameLayout
         android:id="@+id/player_11_card"
-        android:name="com.example.bloodbowlplayingaid.PlayerCardFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -190,9 +179,8 @@
         app:layout_constraintStart_toEndOf="@id/player_10_card"
         app:layout_constraintTop_toBottomOf="@+id/player_5_card" />
 
-    <fragment
+    <FrameLayout
         android:id="@+id/player_12_card"
-        android:name="com.example.bloodbowlplayingaid.PlayerCardFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"

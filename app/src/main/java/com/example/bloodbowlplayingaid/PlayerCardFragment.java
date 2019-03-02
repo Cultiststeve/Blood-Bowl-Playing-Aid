@@ -23,7 +23,7 @@ public class PlayerCardFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String TAG = "BBH_PlayerCardFragment";
-    private static final String ARG_PARAM1 = "Button Number";
+    private static final String ARG_PARAM1 = "FRAGMENT_NUMBER";
     private static final String ARG_PARAM2 = "param2";
 
     private Button card_button;
@@ -63,6 +63,7 @@ public class PlayerCardFragment extends Fragment {
         Log.d(TAG, "onCreate() called with: savedInstanceState = [" + savedInstanceState + "]");
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
+            Log.d(TAG, "onCreate: Setting card number to " + getArguments().getInt(ARG_PARAM1));
             card_number = getArguments().getInt(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
@@ -78,7 +79,13 @@ public class PlayerCardFragment extends Fragment {
 
         card_button = rootView.findViewById(R.id.card_button); // Get button, store in fragment variable
 
-
+        if (card_number != null){
+            Integer display_num  = card_number+1;
+            card_button.setText("Player " + (display_num).toString());
+            Log.d(TAG, "onCreateView: cardnum = " + card_number.toString());
+        } else {
+            Log.d(TAG, "onCreateView: Card num is null");
+        }
 
         return rootView;
     }
@@ -91,18 +98,11 @@ public class PlayerCardFragment extends Fragment {
         card_button.setOnClickListener(new View.OnClickListener() { // Set button behaviour
             @Override
             public void onClick(View v) {
+                Log.d(TAG, "onClick() called with: v = [" + v + "]");
                 //TODO set button behaviour
                 card_button.setText("pressed");
             }
         });
-
-        if (card_number != null){
-            Log.d(TAG, "OnStart: Setting button text to " + card_number.toString());
-            card_button.setText(card_number.toString());
-        } else{
-            Log.d(TAG, "onStart: No card number");
-            card_button.setText("Error occured");
-        }
     }
 
     @Override
@@ -136,4 +136,5 @@ public class PlayerCardFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
 }
