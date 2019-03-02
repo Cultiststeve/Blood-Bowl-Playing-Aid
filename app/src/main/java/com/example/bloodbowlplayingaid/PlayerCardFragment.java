@@ -14,12 +14,12 @@ import android.widget.Button;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Fragment_Player_Card.OnFragmentInteractionListener} interface
+ * {@link PlayerCardFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Fragment_Player_Card#newInstance} factory method to
+ * Use the {@link PlayerCardFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Fragment_Player_Card extends Fragment {
+public class PlayerCardFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String TAG = "BBH_PlayerCardFragment";
@@ -34,7 +34,7 @@ public class Fragment_Player_Card extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public Fragment_Player_Card() {
+    public PlayerCardFragment() {
         // Required empty public constructor
     }
 
@@ -44,13 +44,13 @@ public class Fragment_Player_Card extends Fragment {
      *
      * @param card_number Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Fragment_Player_Card.
+     * @return A new instance of fragment PlayerCardFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static Fragment_Player_Card newInstance(Integer card_number, String param2) {
+    public static PlayerCardFragment newInstance(Integer card_number, String param2) {
         Log.d(TAG, "newInstance() called with: card_number = [" + card_number + "], param2 = [" + param2 + "]");
 
-        Fragment_Player_Card fragment = new Fragment_Player_Card();
+        PlayerCardFragment fragment = new PlayerCardFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_PARAM1, card_number);
         args.putString(ARG_PARAM2, param2);

@@ -10,15 +10,15 @@ import android.view.View;
 
 import java.util.ArrayList;
 
-public class Activity_Ingame extends AppCompatActivity
-    implements Fragment_Player_Card.OnFragmentInteractionListener,
-        FragmentExtraButtons.OnFragmentInteractionListener,
-        Fragment_Dialogue_New_turn.Fragment_Dialog_New_Turn_Listener {
+public class IngameActivity extends AppCompatActivity
+    implements PlayerCardFragment.OnFragmentInteractionListener,
+        ControlButtonsFragment.OnFragmentInteractionListener,
+        NewTurnDialogueFragment.Fragment_Dialog_New_Turn_Listener {
 
     private static final String TAG = "BBH_Activity_Ingame";
     ArrayList<View> player_card_views = new ArrayList<>(12);
-    ArrayList<Fragment_Player_Card> player_card_fragments = new ArrayList<>(12);
-    FragmentExtraButtons fragmentExtraButtons;
+    ArrayList<PlayerCardFragment> player_card_fragments = new ArrayList<>(12);
+    ControlButtonsFragment controlButtonsFragment;
 
     private Integer current_turn = 0;
 
@@ -43,7 +43,7 @@ public class Activity_Ingame extends AppCompatActivity
 
         // Recreate each fragment with its info about what position its in
         for(int i = 0; i< player_card_views.size(); i++){
-            Fragment_Player_Card new_fragment = Fragment_Player_Card.newInstance(i, "test");
+            PlayerCardFragment new_fragment = PlayerCardFragment.newInstance(i, "test");
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(player_card_views.get(i).getId(), new_fragment);
             transaction.commit();
@@ -52,9 +52,9 @@ public class Activity_Ingame extends AppCompatActivity
 
         // Set fragment for button draw
         View view_button_draw = findViewById(R.id.button_draw);
-        fragmentExtraButtons = FragmentExtraButtons.newInstance("del", "del2");
+        controlButtonsFragment = ControlButtonsFragment.newInstance("del", "del2");
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(view_button_draw.getId(), fragmentExtraButtons);
+        transaction.replace(view_button_draw.getId(), controlButtonsFragment);
         transaction.commit();
 
     }
@@ -68,7 +68,7 @@ public class Activity_Ingame extends AppCompatActivity
     public void onDialogPositiveClick(DialogFragment dialogFragment) {
         Log.d(TAG, "onDialogPositiveClick: New turn was selected");
         current_turn++;
-        fragmentExtraButtons.incrementTurnCounter(current_turn);
+        controlButtonsFragment.incrementTurnCounter(current_turn);
 
     }
 }

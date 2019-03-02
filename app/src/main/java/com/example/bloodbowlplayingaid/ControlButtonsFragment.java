@@ -15,12 +15,12 @@ import android.widget.Button;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link FragmentExtraButtons.OnFragmentInteractionListener} interface
+ * {@link ControlButtonsFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link FragmentExtraButtons#newInstance} factory method to
+ * Use the {@link ControlButtonsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentExtraButtons extends Fragment {
+public class ControlButtonsFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -33,7 +33,7 @@ public class FragmentExtraButtons extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public FragmentExtraButtons() {
+    public ControlButtonsFragment() {
         // Required empty public constructor
     }
 
@@ -43,11 +43,11 @@ public class FragmentExtraButtons extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentExtraButtons.
+     * @return A new instance of fragment ControlButtonsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static FragmentExtraButtons newInstance(String param1, String param2) {
-        FragmentExtraButtons fragment = new FragmentExtraButtons();
+    public static ControlButtonsFragment newInstance(String param1, String param2) {
+        ControlButtonsFragment fragment = new ControlButtonsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -81,7 +81,7 @@ public class FragmentExtraButtons extends Fragment {
         turn_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogFragment dialogFragment = new Fragment_Dialogue_New_turn();
+                DialogFragment dialogFragment = new NewTurnDialogueFragment();
                 dialogFragment.show(getActivity().getSupportFragmentManager(), "new_turn");
             }
         });
