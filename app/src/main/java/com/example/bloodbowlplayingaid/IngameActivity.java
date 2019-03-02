@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -67,8 +68,32 @@ public class IngameActivity extends AppCompatActivity
     @Override
     public void onDialogPositiveClick(DialogFragment dialogFragment) {
         Log.d(TAG, "onDialogPositiveClick: New turn was selected");
-        current_turn++;
-        controlButtonsFragment.incrementTurnCounter(current_turn);
+        newTurn();
+    }
 
+    private void newTurn() {
+        if (current_turn >= 16){
+            Toast.makeText(this, "Game is over.",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        current_turn++;
+        update_fragment_turns();
+    }
+
+    @Override
+    public void reduceTurn() {
+        if (current_turn == 0){
+            Toast.makeText(this, "Cant go back past turn 0.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        current_turn--;
+        update_fragment_turns();
+    }
+
+    private void update_fragment_turns(){
+        controlButtonsFragment.incrementTurnCounter(current_turn);
+        for (int i=0; i<player_card_fragments.size(); i++){
+            player_card_fragments.get(i).newTurn();
+        }
     }
 }

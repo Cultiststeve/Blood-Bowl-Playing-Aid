@@ -1,7 +1,6 @@
 package com.example.bloodbowlplayingaid;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -10,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 
 /**
@@ -85,6 +85,14 @@ public class ControlButtonsFragment extends Fragment {
                 dialogFragment.show(getActivity().getSupportFragmentManager(), "new_turn");
             }
         });
+
+        turn_button.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                mListener.reduceTurn();
+                return false;
+            }
+        });
     }
     @Override
     public void onAttach(Context context) {
@@ -115,12 +123,21 @@ public class ControlButtonsFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void reduceTurn();
     }
 
 
     public void incrementTurnCounter(Integer new_turn){
+        Integer new_turn_display;
+        if (new_turn > 8){
+            //Second Half
+            TextView textView = getView().findViewById(R.id.txt_Game_Half);
+            textView.setText("Second Half");
+            new_turn_display = new_turn % 8; // If second half, display turn 1-8
+        } else {
+            new_turn_display = new_turn;
+        }
         Button turn_button = getView().findViewById(R.id.btn_Turn_Count);
-        turn_button.setText(new_turn.toString());
+        turn_button.setText(new_turn_display.toString());
     }
 }

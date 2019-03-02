@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 
 /**
@@ -33,6 +34,8 @@ public class PlayerCardFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    public Boolean has_played = Boolean.FALSE;
 
     public PlayerCardFragment() {
         // Required empty public constructor
@@ -99,8 +102,12 @@ public class PlayerCardFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick() called with: v = [" + v + "]");
-                //TODO set button behaviour
-                card_button.setText("pressed");
+                if (has_played){
+                    Toast.makeText(getContext(), "Player has already played", Toast.LENGTH_SHORT).show();
+                } else {
+                    has_played = Boolean.TRUE;
+                    card_button.setBackgroundColor(getResources().getColor(R.color.colorPlayed));
+                }
             }
         });
     }
@@ -137,4 +144,9 @@ public class PlayerCardFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
+    public void newTurn(){
+        //Reset color
+        has_played = Boolean.FALSE;
+        card_button.setBackgroundColor(getResources().getColor(R.color.colorNotPlayed));
+    }
 }
