@@ -3,6 +3,7 @@ package com.example.bloodbowlplayingaid;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,27 +15,25 @@ import android.widget.Button;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link PlayerCardFragment.OnFragmentInteractionListener} interface
+ * {@link FragmentExtraButtons.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link PlayerCardFragment#newInstance} factory method to
+ * Use the {@link FragmentExtraButtons#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PlayerCardFragment extends Fragment {
+public class FragmentExtraButtons extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String TAG = "BBH_PlayerCardFragment";
-    private static final String ARG_PARAM1 = "FRAGMENT_NUMBER";
+    private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    private Button card_button;
+    private static final String TAG = "BBH_Button_Draw";
 
     // TODO: Rename and change types of parameters
-    private Integer card_number;
+    private String mParam1;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
-    public PlayerCardFragment() {
+    public FragmentExtraButtons() {
         // Required empty public constructor
     }
 
@@ -42,17 +41,15 @@ public class PlayerCardFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param card_number Parameter 1.
+     * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment PlayerCardFragment.
+     * @return A new instance of fragment FragmentExtraButtons.
      */
     // TODO: Rename and change types and number of parameters
-    public static PlayerCardFragment newInstance(Integer card_number, String param2) {
-        Log.d(TAG, "newInstance() called with: card_number = [" + card_number + "], param2 = [" + param2 + "]");
-
-        PlayerCardFragment fragment = new PlayerCardFragment();
+    public static FragmentExtraButtons newInstance(String param1, String param2) {
+        FragmentExtraButtons fragment = new FragmentExtraButtons();
         Bundle args = new Bundle();
-        args.putInt(ARG_PARAM1, card_number);
+        args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
@@ -60,34 +57,18 @@ public class PlayerCardFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Log.d(TAG, "onCreate() called with: savedInstanceState = [" + savedInstanceState + "]");
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            Log.d(TAG, "onCreate: Setting card number to " + getArguments().getInt(ARG_PARAM1));
-            card_number = getArguments().getInt(ARG_PARAM1);
+            mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.d(TAG, "onCreateView() called with: inflater = [" + inflater + "], container = [" + container + "], savedInstanceState = [" + savedInstanceState + "]");
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.player_card_fragment, container, false);
-
-        card_button = rootView.findViewById(R.id.card_button); // Get button, store in fragment variable
-
-        if (card_number != null){
-            Integer display_num  = card_number+1;
-            card_button.setText("Player " + (display_num).toString());
-            Log.d(TAG, "onCreateView: cardnum = " + card_number.toString());
-        } else {
-            Log.d(TAG, "onCreateView: Card num is null");
-        }
-
-        return rootView;
+        return inflater.inflate(R.layout.fragment_fragment__button__draw, container, false);
     }
 
     @Override
@@ -95,16 +76,16 @@ public class PlayerCardFragment extends Fragment {
         Log.d(TAG, "onStart() called");
         super.onStart();
 
-        card_button.setOnClickListener(new View.OnClickListener() { // Set button behaviour
+        Button turn_button = getView().findViewById(R.id.btn_Turn_Count);
+
+        turn_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick() called with: v = [" + v + "]");
-                //TODO set button behaviour
-                card_button.setText("pressed");
+                DialogFragment dialogFragment = new Fragment_Dialogue_New_turn();
+                dialogFragment.show(getActivity().getSupportFragmentManager(), "new_turn");
             }
         });
     }
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -137,4 +118,9 @@ public class PlayerCardFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
+
+    public void incrementTurnCounter(Integer new_turn){
+        Button turn_button = getView().findViewById(R.id.btn_Turn_Count);
+        turn_button.setText(new_turn.toString());
+    }
 }
