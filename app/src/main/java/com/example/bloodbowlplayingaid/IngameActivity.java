@@ -22,12 +22,20 @@ public class IngameActivity extends AppCompatActivity
     ArrayList<PlayerCardFragment> player_card_fragments = new ArrayList<>(12);
     ControlButtonsFragment controlButtonsFragment;
 
-    private Integer current_turn = 0;
+    private Integer currentTurn = 0;
+    private ArrayList<String> playerNameList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ingame);
+
+        //Get playerNameList
+        Intent intent = getIntent();
+        if (intent != null){
+            playerNameList = intent.getStringArrayListExtra(TeamSetupActivity.extraPlayerList);
+            Log.d(TAG, "onCreate: Got player list" + playerNameList.toString());
+        }
 
         // Set buttons to player names
         player_card_views.add(0, findViewById(R.id.player_1_card));
@@ -45,7 +53,15 @@ public class IngameActivity extends AppCompatActivity
 
         // Recreate each fragment with its info about what position its in
         for(int i = 0; i< player_card_views.size(); i++){
-            PlayerCardFragment new_fragment = PlayerCardFragment.newInstance(i, "test");
+            
+            String player_name;
+            if (i < playerNameList.size()) {
+                player_name = playerNameList.get(i);
+            } else {
+                player_name = "Player " + Integer.toString(i);
+            }
+
+            PlayerCardFragment new_fragment = PlayerCardFragment.newInstance(i, player_name);
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(player_card_views.get(i).getId(), new_fragment);
             transaction.commit();
@@ -73,21 +89,21 @@ public class IngameActivity extends AppCompatActivity
     }
 
     private void newTurn() {
-        if (current_turn >= 16){
+        if (currentTurn >= 16){
             Toast.makeText(this, "Game is over.",Toast.LENGTH_SHORT).show();
             return;
         }
-        current_turn++;
+        currentTurn++;
         update_fragment_turns();
     }
 
     @Override
     public void reduceTurn() {
-        if (current_turn == 0){
+        if (currentTurn == 0){
             Toast.makeText(this, "Cant go back past turn 0.", Toast.LENGTH_SHORT).show();
             return;
         }
-        current_turn--;
+        currentTurn--;
         update_fragment_turns();
     }
 
@@ -99,7 +115,7 @@ public class IngameActivity extends AppCompatActivity
     }
 
     private void update_fragment_turns(){
-        controlButtonsFragment.incrementTurnCounter(current_turn);
+        controlButtonsFragment.incrementTurnCounter(currentTurn);
         for (int i=0; i<player_card_fragments.size(); i++){
             player_card_fragments.get(i).newTurn();
         }

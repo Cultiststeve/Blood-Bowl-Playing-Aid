@@ -21,21 +21,19 @@ import android.widget.Toast;
  * create an instance of this fragment.
  */
 public class PlayerCardFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String TAG = "BBH_PlayerCardFragment";
-    private static final String ARG_PARAM1 = "CARD_POSITION";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_CARD_POSITION = "CARD_POSITION";
+    private static final String ARG_PLAYER_NAME = "PLAYER_NAME";
 
-    private Button card_button;
+    private Button cardButton;
 
     // TODO: Rename and change types of parameters
-    private Integer card_position;
-    private String mParam2;
+    private Integer cardPostion;
+    private String playerName;
 
     private OnFragmentInteractionListener mListener;
 
-    public Boolean has_played = Boolean.FALSE;
+    public Boolean hasPlayed = false;
 
     public PlayerCardFragment() {
         // Required empty public constructor
@@ -51,12 +49,12 @@ public class PlayerCardFragment extends Fragment {
      */
     // TODO: Rename and change types and number of parameters
     public static PlayerCardFragment newInstance(Integer card_number, String param2) {
-        Log.d(TAG, "newInstance() called with: card_position = [" + card_number + "], param2 = [" + param2 + "]");
+        Log.d(TAG, "newInstance() called with: cardPostion = [" + card_number + "], param2 = [" + param2 + "]");
 
         PlayerCardFragment fragment = new PlayerCardFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_PARAM1, card_number);
-        args.putString(ARG_PARAM2, param2);
+        args.putInt(ARG_CARD_POSITION, card_number);
+        args.putString(ARG_PLAYER_NAME, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -66,9 +64,9 @@ public class PlayerCardFragment extends Fragment {
         Log.d(TAG, "onCreate() called with: savedInstanceState = [" + savedInstanceState + "]");
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            Log.d(TAG, "onCreate: Setting card number to " + getArguments().getInt(ARG_PARAM1));
-            card_position = getArguments().getInt(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            Log.d(TAG, "onCreate: Setting card number to " + getArguments().getInt(ARG_CARD_POSITION));
+            cardPostion = getArguments().getInt(ARG_CARD_POSITION);
+            playerName = getArguments().getString(ARG_PLAYER_NAME);
         }
 
     }
@@ -80,12 +78,12 @@ public class PlayerCardFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_player_card, container, false);
 
-        card_button = rootView.findViewById(R.id.card_button); // Get button, store in fragment variable
+        cardButton = rootView.findViewById(R.id.card_button); // Get button, store in fragment variable
 
-        if (card_position != null){
-            Integer display_num  = card_position +1;
-            card_button.setText("Player " + (display_num).toString());
-            Log.d(TAG, "onCreateView: cardnum = " + card_position.toString());
+        if (cardPostion != null){
+            Integer display_num  = cardPostion +1;
+            cardButton.setText(playerName);
+            Log.d(TAG, "onCreateView: cardnum = " + cardPostion.toString());
         } else {
             Log.d(TAG, "onCreateView: Card num is null");
         }
@@ -98,15 +96,15 @@ public class PlayerCardFragment extends Fragment {
         Log.d(TAG, "onStart() called");
         super.onStart();
 
-        card_button.setOnClickListener(new View.OnClickListener() { // Set button behaviour
+        cardButton.setOnClickListener(new View.OnClickListener() { // Set button behaviour
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick() called with: v = [" + v + "]");
-                if (has_played){
+                if (hasPlayed){
                     Toast.makeText(getContext(), "Player has already played", Toast.LENGTH_SHORT).show();
                 } else {
-                    has_played = Boolean.TRUE;
-                    card_button.setBackgroundColor(getResources().getColor(R.color.colorPlayed));
+                    hasPlayed = true;
+                    cardButton.setBackgroundColor(getResources().getColor(R.color.colorPlayed));
                 }
             }
         });
@@ -148,7 +146,7 @@ public class PlayerCardFragment extends Fragment {
 
     public void newTurn(){
         //Reset color
-        has_played = Boolean.FALSE;
-        card_button.setBackgroundColor(getResources().getColor(R.color.colorNotPlayed));
+        hasPlayed = false;
+        cardButton.setBackgroundColor(getResources().getColor(R.color.colorNotPlayed));
     }
 }
