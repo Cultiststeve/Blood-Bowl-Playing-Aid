@@ -114,6 +114,13 @@ public class IngameActivity extends AppCompatActivity
         startActivity(intent);
     }
 
+    @Override
+    public void resetGame() {
+        currentTurn = 0;
+        update_fragment_turns();
+
+    }
+
     private void update_fragment_turns(){
         controlButtonsFragment.incrementTurnCounter(currentTurn);
         for (int i=0; i<player_card_fragments.size(); i++){

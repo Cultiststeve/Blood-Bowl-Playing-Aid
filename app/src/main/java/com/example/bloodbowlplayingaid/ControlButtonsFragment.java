@@ -121,15 +121,15 @@ public class ControlButtonsFragment extends Fragment {
             }
         });
 
-        Button btnNextTurn = getView().findViewById(R.id.btnTurnCount);
-        btnNextTurn.setOnClickListener(new View.OnClickListener() {
+        final Button btnTurnCount = getView().findViewById(R.id.btnTurnCount);
+        btnTurnCount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DialogFragment dialogFragment = new NewTurnDialogueFragment();
                 dialogFragment.show(getActivity().getSupportFragmentManager(), "new_turn");
             }
         });
-        btnNextTurn.setOnLongClickListener(new View.OnLongClickListener() {
+        btnTurnCount.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 mListener.reduceTurn();
@@ -142,6 +142,19 @@ public class ControlButtonsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 mListener.closeIngame();
+            }
+        });
+
+        ImageButton btnResetGame = getView().findViewById(R.id.btnResetGame);
+        btnResetGame.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                rerolls = 0;
+                btnReroll.setText(rerolls.toString());
+                touchdowns = 0;
+                btnTouchdown.setText(touchdowns.toString());
+                mListener.resetGame();
+                return true;
             }
         });
     }
@@ -176,6 +189,7 @@ public class ControlButtonsFragment extends Fragment {
         // TODO: Update argument type and name
         void reduceTurn();
         void closeIngame();
+        void resetGame(); //TODO code
     }
 
 
