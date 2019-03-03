@@ -193,22 +193,27 @@ public class ControlButtonsFragment extends Fragment {
         void resetGame(); //TODO code
     }
 
-
-    public void incrementTurnCounter(Integer new_turn){
-        Integer new_turn_display;
-        if (new_turn > 8){
-            //Second Half
-            TextView textView = getView().findViewById(R.id.txt_Game_Half);
-            textView.setText("Second Half");
-            new_turn_display = new_turn % 8; // If second half, display turn 1-8
-        } else {
-            new_turn_display = new_turn;
-        }
-        Button turn_button = getView().findViewById(R.id.btnTurnCount);
-        turn_button.setText(new_turn_display.toString());
+    public void updateGameData(Integer currentTurn, Integer currentRerolls, Integer currentTouchdowns){
+        final Button btnTurnCount = getView().findViewById(R.id.btnTurnCount);
+        final Button btnReroll = getView().findViewById(R.id.btnReroll);
+        final Button btnTouchdown = getView().findViewById(R.id.btnTouchdown);
+        btnTurnCount.setText(currentTurn);
+        btnReroll.setText(currentRerolls);
+        btnTouchdown.setText(currentTouchdowns);
+        updateHalfText(currentTurn);
     }
 
-    public void onBtnRerolls(View view){
 
+    public void updateHalfText(Integer currentTurn){
+        final Button btnTurnCount = getView().findViewById(R.id.btnTurnCount);
+        final TextView textView = getView().findViewById(R.id.txt_Game_Half);
+
+        if (currentTurn > 8){
+            //Second Half
+            textView.setText("Second Half");
+            btnTurnCount.setText(currentTurn%8);
+        } else {
+            textView.setText("First Half");
+        }
     }
 }

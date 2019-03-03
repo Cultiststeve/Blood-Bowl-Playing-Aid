@@ -18,12 +18,14 @@ public class IngameActivity extends AppCompatActivity
         NewTurnDialogueFragment.Fragment_Dialog_New_Turn_Listener {
 
     private static final String TAG = "BBH_Activity_Ingame";
+    private static final String intentExtraTurnCount = "EXTRA_TURN_COUNT";
     ArrayList<View> player_card_views = new ArrayList<>(12);
     ArrayList<PlayerCardFragment> player_card_fragments = new ArrayList<>(12);
     ControlButtonsFragment controlButtonsFragment;
 
-    private Integer currentTurn = 0;
-    private ArrayList<String> playerNameList;
+//    private Integer currentTurn = 0; // track current turn, 9 = turn 1 of 2nd half
+//    private ArrayList<String> playerNameList;
+    private DataGameState dataGameState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +35,11 @@ public class IngameActivity extends AppCompatActivity
         //Get playerNameList
         Intent intent = getIntent();
         if (intent != null){
-            playerNameList = intent.getStringArrayListExtra(TeamSetupActivity.extraPlayerList);
-            Log.d(TAG, "onCreate: Got player list" + playerNameList.toString());
+            dataGameState = intent.getParcelableExtra(TeamSetupActivity.intentExtraGameState);
+            if (dataGameState == null){
+                Log.e(TAG, "onCreate: No gameState data. IS required");
+            }
+            Log.d(TAG, "onCreate: Got game state data, player list" + dataGameState.teamList.toString());
         }
 
         // Set buttons to player names
@@ -55,8 +60,8 @@ public class IngameActivity extends AppCompatActivity
         for(int i = 0; i< player_card_views.size(); i++){
             
             String player_name;
-            if (i < playerNameList.size()) {
-                player_name = playerNameList.get(i);
+            if (i < dataGameState.teamList.size()) {
+                player_name = dataGameState.teamList.get(i);
             } else {
                 player_name = "Player NOT FOUND";
             }
@@ -89,40 +94,46 @@ public class IngameActivity extends AppCompatActivity
     }
 
     private void newTurn() {
-        if (currentTurn >= 16){
+        if (dataGameState.getCurrentTurn() >= 16){
             Toast.makeText(this, "Game is over.",Toast.LENGTH_SHORT).show();
             return;
         }
-        currentTurn++;
-        update_fragment_turns();
+        dataGameState.incrementCurrentTurn();;
+        controlButtonsFragment.updateGameData(dataGameState.getCurrentTurn(),
+                dataGameState.getCurrentRerolls(),
+                dataGameState.getCurrentTouchdowns());
+        updatePlayerFragmentsNewTurn();
     }
 
     @Override
     public void reduceTurn() {
-        if (currentTurn == 0){
+        if (dataGameState.getCurrentTurn() == 0){
             Toast.makeText(this, "Cant go back past turn 0.", Toast.LENGTH_SHORT).show();
             return;
         }
-        currentTurn--;
-        update_fragment_turns();
+        dataGameState.decrementCurrentTurn();
     }
 
     @Override
     public void closeIngame() {
         // Control button fragment button to close has been pressed. Do the thing
         Intent intent = new Intent(this, TeamSetupActivity.class);
+        intent.putExtra(TeamSetupActivity.intentExtraGameState, dataGameState);
         startActivity(intent);
     }
 
     @Override
     public void resetGame() {
-        currentTurn = 0;
-        update_fragment_turns();
+        dataGameState.setCurrentTurn(0);
+        dataGameState.setCurrentRerolls(0);
+        dataGameState.setCurrentTouchdowns(0);
+        controlButtonsFragment.updateGameData(dataGameState.getCurrentTurn(),
+                dataGameState.getCurrentRerolls(),
+                dataGameState.getCurrentTouchdowns());
 
     }
 
-    private void update_fragment_turns(){
-        controlButtonsFragment.incrementTurnCounter(currentTurn);
+    private void updatePlayerFragmentsNewTurn(){
         for (int i=0; i<player_card_fragments.size(); i++){
             player_card_fragments.get(i).newTurn();
         }
