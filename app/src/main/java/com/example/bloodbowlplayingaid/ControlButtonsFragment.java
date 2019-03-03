@@ -35,8 +35,8 @@ public class ControlButtonsFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    private Integer rerolls = 0;
-    private Integer touchdowns = 0;
+//    private Integer rerolls = 0;
+//    private Integer touchdowns = 0;
 
     public ControlButtonsFragment() {
         // Required empty public constructor
@@ -86,17 +86,13 @@ public class ControlButtonsFragment extends Fragment {
         btnReroll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (rerolls > 0){
-                    rerolls--;
-                    btnReroll.setText(rerolls.toString());
-                }
+                mListener.rerollClick();
             }
         });
         btnReroll.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                rerolls++;
-                btnReroll.setText(rerolls.toString());
+                mListener.rerollLongClick();
                 return true;
             }
         });
@@ -105,18 +101,14 @@ public class ControlButtonsFragment extends Fragment {
         btnTouchdown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                touchdowns++;
-                btnTouchdown.setText(touchdowns.toString());
+                mListener.touchdownClick();
                 Toast.makeText(getContext(), "!! SCORE !!", Toast.LENGTH_LONG).show();
             }
         });
         btnTouchdown.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                if (touchdowns > 0){
-                    touchdowns--;
-                    btnTouchdown.setText(touchdowns.toString());
-                }
+                mListener.touchdownLongClick();
                 return true;
             }
         });
@@ -132,7 +124,7 @@ public class ControlButtonsFragment extends Fragment {
         btnTurnCount.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                mListener.reduceTurn();
+                mListener.turnLongClick();
                 return true;
             }
         });
@@ -146,14 +138,10 @@ public class ControlButtonsFragment extends Fragment {
             }
         });
 
-        ImageButton btnResetGame = getView().findViewById(R.id.btnResetGame);
+        final ImageButton btnResetGame = getView().findViewById(R.id.btnResetGame);
         btnResetGame.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                rerolls = 0;
-                btnReroll.setText(rerolls.toString());
-                touchdowns = 0;
-                btnTouchdown.setText(touchdowns.toString());
                 mListener.resetGame();
                 return true;
             }
@@ -188,18 +176,23 @@ public class ControlButtonsFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void reduceTurn();
         void closeIngame();
         void resetGame(); //TODO code
+//        void turnClick(); // Not required as dialogue handles choice
+        void turnLongClick();
+        void rerollClick();
+        void rerollLongClick();
+        void touchdownClick();
+        void touchdownLongClick();
     }
 
     public void updateGameData(Integer currentTurn, Integer currentRerolls, Integer currentTouchdowns){
         final Button btnTurnCount = getView().findViewById(R.id.btnTurnCount);
         final Button btnReroll = getView().findViewById(R.id.btnReroll);
         final Button btnTouchdown = getView().findViewById(R.id.btnTouchdown);
-        btnTurnCount.setText(currentTurn);
-        btnReroll.setText(currentRerolls);
-        btnTouchdown.setText(currentTouchdowns);
+        btnTurnCount.setText(currentTurn.toString());
+        btnReroll.setText(currentRerolls.toString());
+        btnTouchdown.setText(currentTouchdowns.toString());
         updateHalfText(currentTurn);
     }
 

@@ -79,7 +79,12 @@ public class IngameActivity extends AppCompatActivity
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(view_button_draw.getId(), controlButtonsFragment);
         transaction.commit();
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateButtonFragment(); //Ensure that buttons are synced to current data
     }
 
     @Override
@@ -89,6 +94,7 @@ public class IngameActivity extends AppCompatActivity
 
     @Override
     public void onDialogPositiveClick(DialogFragment dialogFragment) {
+        //Dialogue fragment caused when asking to increment turns calls this func when accepted
         Log.d(TAG, "onDialogPositiveClick: New turn was selected");
         newTurn();
     }
@@ -98,20 +104,15 @@ public class IngameActivity extends AppCompatActivity
             Toast.makeText(this, "Game is over.",Toast.LENGTH_SHORT).show();
             return;
         }
-        dataGameState.incrementCurrentTurn();;
-        controlButtonsFragment.updateGameData(dataGameState.getCurrentTurn(),
-                dataGameState.getCurrentRerolls(),
-                dataGameState.getCurrentTouchdowns());
+        dataGameState.incrementTurn();;
+        updateButtonFragment();
         updatePlayerFragmentsNewTurn();
     }
 
-    @Override
-    public void reduceTurn() {
-        if (dataGameState.getCurrentTurn() == 0){
-            Toast.makeText(this, "Cant go back past turn 0.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        dataGameState.decrementCurrentTurn();
+    public void updateButtonFragment(){
+        controlButtonsFragment.updateGameData(dataGameState.getCurrentTurn(),
+                dataGameState.getCurrentRerolls(),
+                dataGameState.getCurrentTouchdowns());
     }
 
     @Override
@@ -133,9 +134,53 @@ public class IngameActivity extends AppCompatActivity
 
     }
 
+    @Override
+    public void turnLongClick() {
+        if (dataGameState.getCurrentTurn() > 0){
+            dataGameState.decrementTurn();
+        } else {
+            Toast.makeText(this, "Can not go below turn 0.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void rerollClick() {
+        if (dataGameState.getCurrentRerolls() > 0){
+            dataGameState.decrementRerolls();
+            updateButtonFragment();
+        } else {
+            Toast.makeText(this, "Can not go below 0 rerolls.", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    @Override
+    public void rerollLongClick() {
+        dataGameState.incrementRerolls();
+        updateButtonFragment();
+    }
+
+    @Override
+    public void touchdownClick() {
+        dataGameState.incrementTouchdowns();
+        updateButtonFragment();
+    }
+
+    @Override
+    public void touchdownLongClick() {
+        if (dataGameState.getCurrentTurn() == 0){
+            Toast.makeText(this, "Cant go back past turn 0.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        dataGameState.decrementTouchdowns();
+        updateButtonFragment();
+    }
+
     private void updatePlayerFragmentsNewTurn(){
         for (int i=0; i<player_card_fragments.size(); i++){
             player_card_fragments.get(i).newTurn();
         }
     }
+
+
 }

@@ -66,13 +66,30 @@ public class DataGameState implements Parcelable {
         this.currentTurn = currentTurn;
     }
 
-    public void incrementCurrentTurn(){
+    public void incrementTurn(){
         this.currentTurn++;
     }
 
-    public void decrementCurrentTurn(){
+    public void decrementTurn(){
         this.currentTurn--;
     }
+
+    public void incrementRerolls(){
+        this.currentRerolls++;
+    }
+
+    public void decrementRerolls(){
+        this.currentRerolls--;
+    }
+
+    public void incrementTouchdowns(){
+        this.currentTouchdowns++;
+    }
+
+    public void decrementTouchdowns(){
+        this.currentTouchdowns--;
+    }
+
 
     @Override
     public int describeContents() {
