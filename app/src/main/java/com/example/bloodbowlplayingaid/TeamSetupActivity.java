@@ -27,8 +27,7 @@ public class TeamSetupActivity extends AppCompatActivity {
     private RecyclerView.Adapter mAdapterTeam;
     private RecyclerView.LayoutManager layoutManagerTeam;
 
-    private EditText editTextPlayerInput;
-    ArrayList<String> teamList = new ArrayList<>();
+    ArrayList<String> teamList = new ArrayList<>(); // List of player strings, e.g "Player 2"
 
     // List of all button Id's currently "on" team
      List<Integer> buttonIdInTeam = new ArrayList<Integer>() {};
@@ -73,6 +72,7 @@ public class TeamSetupActivity extends AppCompatActivity {
             playerButtons.add(i, current_button);
             current_button.setBackgroundColor(getResources().getColor(R.color.colorNotTeam));
 
+            final int finalI = i;
             current_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -80,18 +80,20 @@ public class TeamSetupActivity extends AppCompatActivity {
                         // Button already on team, remove
                         current_button.setBackgroundColor(getResources().getColor(R.color.colorNotTeam));
                         buttonIdInTeam.remove(buttonIdInTeam.indexOf(current_button.getId()));
+
+                        //Remove from team list and recyclerview
+                        removePlayerFromList("Player " + Integer.toString(finalI+1));
                     } else {
                         //TODO is there already 11 players?
                         // Add button to team
                         current_button.setBackgroundColor(getResources().getColor(R.color.colorOnTeam));
                         buttonIdInTeam.add(current_button.getId());
                         //TODO update recyclerview
-
+                        addPlayerToList("Player " + Integer.toString(finalI+1));
                     }
                 }
             });
         }
-
     }
 
     public void onBtnPlayGame(View view){
@@ -100,25 +102,16 @@ public class TeamSetupActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void onBtnAddMember(View view) {
-        String textbox = editTextPlayerInput.getText().toString();
-        if (textbox.equals("")){
-            return; // No player number to add
-        }
-        if (Integer.parseInt(textbox) > 16){
-            Toast.makeText(getApplicationContext(), "Can not have players with number over 16.", Toast.LENGTH_SHORT).show();
-            return; // Dont add player over 16
-        }
-        String new_player = "Player " + editTextPlayerInput.getText();
-        addPlayerToList(new_player);
-
-    }
 
     public void addPlayerToList(String player){
         teamList.add(player);
         mAdapterTeam.notifyItemInserted(teamList.size());
+    }
 
-        //Clear the edit text for next entry
-        editTextPlayerInput.setText("");
+    public void removePlayerFromList(String player){
+        Log.d(TAG, "removePlayerFromList: index to remove: " + teamList.indexOf(player));
+        //teamList is data the recycler view uses
+         mAdapterTeam.notifyItemRemoved(teamList.indexOf(player));
+        teamList.remove(player);
     }
 }
