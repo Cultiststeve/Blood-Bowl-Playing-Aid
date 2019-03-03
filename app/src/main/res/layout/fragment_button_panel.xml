@@ -7,6 +7,29 @@
     android:layout_height="match_parent"
     tools:context=".ControlButtonsFragment">
 
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Touchdowns:"
+        app:layout_constraintBottom_toTopOf="@+id/btnTouchdown"
+        app:layout_constraintEnd_toEndOf="@+id/btnTouchdown"
+        app:layout_constraintStart_toStartOf="@+id/btnTouchdown"
+        app:layout_constraintTop_toBottomOf="@+id/btnCloseGame" />
+
+    <Button
+        android:id="@+id/btnTouchdown"
+        android:layout_width="89dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:text="0"
+        app:layout_constraintStart_toEndOf="@+id/btnReroll"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
     <Button
         android:id="@+id/btnTurnCount"
         android:layout_width="0dp"
@@ -29,7 +52,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txt_Game_Half" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/btnResetGame"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -87,13 +110,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:text="Rerolls:"
-        app:layout_constraintEnd_toEndOf="@+id/button3"
-        app:layout_constraintStart_toStartOf="@+id/button3"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton" />
+        app:layout_constraintBottom_toTopOf="@+id/btnReroll"
+        app:layout_constraintEnd_toEndOf="@+id/btnReroll"
+        app:layout_constraintStart_toStartOf="@+id/btnReroll"
+        app:layout_constraintTop_toBottomOf="@+id/btnResetGame" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btnReroll"
         android:layout_width="89dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"

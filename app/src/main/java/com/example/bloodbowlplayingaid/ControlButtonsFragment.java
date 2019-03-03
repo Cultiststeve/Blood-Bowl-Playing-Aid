@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 /**
@@ -33,6 +34,9 @@ public class ControlButtonsFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    private Integer rerolls = 0;
+    private Integer touchdowns = 0;
 
     public ControlButtonsFragment() {
         // Required empty public constructor
@@ -77,26 +81,64 @@ public class ControlButtonsFragment extends Fragment {
         Log.d(TAG, "onStart() called");
         super.onStart();
 
-        Button turn_button = getView().findViewById(R.id.btnTurnCount);
+        //Setup buttons
+        final Button btnReroll = getView().findViewById(R.id.btnReroll);
+        btnReroll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (rerolls > 0){
+                    rerolls--;
+                    btnReroll.setText(rerolls.toString());
+                }
+            }
+        });
+        btnReroll.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                rerolls++;
+                btnReroll.setText(rerolls.toString());
+                return true;
+            }
+        });
 
-        turn_button.setOnClickListener(new View.OnClickListener() {
+        final Button btnTouchdown = getView().findViewById(R.id.btnTouchdown);
+        btnTouchdown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                touchdowns++;
+                btnTouchdown.setText(touchdowns.toString());
+                Toast.makeText(getContext(), "!! SCORE !!", Toast.LENGTH_LONG).show();
+            }
+        });
+        btnTouchdown.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (touchdowns > 0){
+                    touchdowns--;
+                    btnTouchdown.setText(touchdowns.toString());
+                }
+                return true;
+            }
+        });
+
+        Button btnNextTurn = getView().findViewById(R.id.btnTurnCount);
+        btnNextTurn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DialogFragment dialogFragment = new NewTurnDialogueFragment();
                 dialogFragment.show(getActivity().getSupportFragmentManager(), "new_turn");
             }
         });
-
-        turn_button.setOnLongClickListener(new View.OnLongClickListener() {
+        btnNextTurn.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 mListener.reduceTurn();
-                return false;
+                return true;
             }
         });
 
-        ImageButton closeImageButton = getView().findViewById(R.id.btnCloseGame);
-        closeImageButton.setOnClickListener(new View.OnClickListener() {
+        ImageButton ibtnCloseCurrentGame = getView().findViewById(R.id.btnCloseGame);
+        ibtnCloseCurrentGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mListener.closeIngame();
@@ -149,5 +191,9 @@ public class ControlButtonsFragment extends Fragment {
         }
         Button turn_button = getView().findViewById(R.id.btnTurnCount);
         turn_button.setText(new_turn_display.toString());
+    }
+
+    public void onBtnRerolls(View view){
+
     }
 }
