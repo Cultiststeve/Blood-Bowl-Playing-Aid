@@ -223,9 +223,21 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/imgBtnResetTeam"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnPlayer4"
         app:layout_constraintTop_toBottomOf="@+id/button" />
+
+    <ImageButton
+        android:id="@+id/imgBtnResetTeam"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:onClick="onBtnResetTeam"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/recyclerViewTeam"
+        app:layout_constraintStart_toStartOf="@+id/recyclerViewTeam"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewTeam"
+        app:srcCompat="@drawable/ic_close_black_24dp" />
 
 </android.support.constraint.ConstraintLayout>

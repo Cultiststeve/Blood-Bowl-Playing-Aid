@@ -94,6 +94,7 @@ public class TeamSetupActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     if (buttonIdInTeam.contains(current_button.getId())){
                         // Button already on team, remove
+                        Log.d(TAG, "onClick: Player already on team, removing");
                         current_button.setBackgroundColor(getResources().getColor(R.color.colorNotTeam));
                         buttonIdInTeam.remove(buttonIdInTeam.indexOf(current_button.getId()));
 
@@ -145,10 +146,10 @@ public class TeamSetupActivity extends AppCompatActivity {
             public int compare(String s1, String s2) {
                 String s1PlayerNumText = s1.replace("Player ", "");
                 String s2PlayerNumText = s2.replace("Player ", "");
-                Log.d(TAG, "compare: Val1 / val2:" + s1PlayerNumText + " : " + s2PlayerNumText);
+//                Log.d(TAG, "compare: Val1 / val2:" + s1PlayerNumText + " : " + s2PlayerNumText);
                 Integer s1_int = Integer.parseInt(s1PlayerNumText);
                 Integer s2_int = Integer.parseInt(s2PlayerNumText);
-                Log.d(TAG, "compare: s1/s2: " + s1_int + " : " + s2_int);
+//                Log.d(TAG, "compare: s1/s2: " + s1_int + " : " + s2_int);
                 return (s1_int-s2_int);
 //                return 0;
             }
@@ -160,7 +161,21 @@ public class TeamSetupActivity extends AppCompatActivity {
     public void removePlayerFromList(String player){
         Log.d(TAG, "removePlayerFromList: index to remove: " + dataGameState.teamList.indexOf(player));
         //teamList is data the recycler view uses
-         mAdapterTeam.notifyItemRemoved(dataGameState.teamList.indexOf(player));
+        mAdapterTeam.notifyItemRemoved(dataGameState.teamList.indexOf(player));
         dataGameState.teamList.remove(player);
+    }
+
+    public void onBtnResetTeam(View view){
+        dataGameState.teamList.clear();
+        mAdapterTeam.notifyDataSetChanged();
+
+        // Make sure all buttons are off
+        for (int i=0; i<buttonIdInTeam.size(); i++){
+            Button button = findViewById(buttonIdInTeam.get(i));
+            button.setBackgroundColor(getResources().getColor(R.color.colorNotTeam));
+        }
+        buttonIdInTeam = new ArrayList<Integer>() {};
+
+
     }
 }

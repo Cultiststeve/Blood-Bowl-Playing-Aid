@@ -2,7 +2,7 @@
 # Short term
 * Add button for dead player
 * Swap players midgame
-* Resetgame on main screen
+* Reset game slidy?
 
 # Long term
 * Team roster tracking
