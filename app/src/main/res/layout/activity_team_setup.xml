@@ -7,31 +7,129 @@
     tools:context=".TeamSetupActivity">
 
     <Button
+        android:id="@+id/btnPlayer16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@color/colorPlayed"
+        android:text="16"
+        app:layout_constraintStart_toEndOf="@+id/btnPlayer15"
+        app:layout_constraintTop_toTopOf="@+id/btnPlayer13" />
+
+    <Button
+        android:id="@+id/btnPlayer15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@color/colorPlayed"
+        android:text="15"
+        app:layout_constraintStart_toEndOf="@+id/btnPlayer14"
+        app:layout_constraintTop_toTopOf="@+id/btnPlayer13" />
+
+    <Button
+        android:id="@+id/btnPlayer14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@color/colorPlayed"
+        android:text="14"
+        app:layout_constraintStart_toEndOf="@+id/btnPlayer13"
+        app:layout_constraintTop_toTopOf="@+id/btnPlayer13" />
+
+    <Button
+        android:id="@+id/btnPlayer13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorPlayed"
+        android:text="13"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnPlayer9" />
+
+    <Button
+        android:id="@+id/btnPlayer12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@color/colorPlayed"
+        android:text="12"
+        app:layout_constraintStart_toEndOf="@+id/btnPlayer11"
+        app:layout_constraintTop_toTopOf="@+id/btnPlayer9" />
+
+    <Button
+        android:id="@+id/btnPlayer11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@color/colorPlayed"
+        android:text="11"
+        app:layout_constraintStart_toEndOf="@+id/btnPlayer10"
+        app:layout_constraintTop_toTopOf="@+id/btnPlayer9" />
+
+    <Button
+        android:id="@+id/btnPlayer5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:text="5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnPlayer1"
+        android:background="@color/colorPlayed" />
+
+    <Button
+        android:id="@+id/btnPlayer6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@color/colorPlayed"
+        android:text="6"
+        app:layout_constraintStart_toEndOf="@+id/btnPlayer5"
+        app:layout_constraintTop_toTopOf="@+id/btnPlayer5" />
+
+    <Button
+        android:id="@+id/btnPlayer8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@color/colorPlayed"
+        android:text="8"
+        app:layout_constraintStart_toEndOf="@+id/btnPlayer7"
+        app:layout_constraintTop_toTopOf="@+id/btnPlayer5" />
+
+    <Button
+        android:id="@+id/btnPlayer7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@color/colorPlayed"
+        android:text="7"
+        app:layout_constraintStart_toEndOf="@+id/btnPlayer6"
+        app:layout_constraintTop_toTopOf="@+id/btnPlayer5" />
+
+    <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:background="@color/colorPlayed"
         android:onClick="onBtnPlayGame"
         android:text="Play Game"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/recylerViewTeam"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/edtTxtPlayerInput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintStart_toStartOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
 
     <TextView
         android:id="@+id/textView5"
@@ -40,45 +138,92 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Add Player:"
-        app:layout_constraintBottom_toBottomOf="@+id/button2"
-        app:layout_constraintEnd_toStartOf="@+id/button2"
+        android:text="Select team players:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recylerViewTeam"
-        android:layout_width="353dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginLeft="1dp"
+    <Button
+        android:id="@+id/btnPlayer1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button"
-        app:layout_constraintHorizontal_weight="5"
-        app:layout_constraintStart_toEndOf="@+id/button2"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:background="@color/colorPlayed"
+        android:text="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="0dp"
+        android:id="@+id/btnPlayer2"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@color/colorPlayed"
+        android:text="2"
+        app:layout_constraintStart_toEndOf="@+id/btnPlayer1"
+        app:layout_constraintTop_toTopOf="@+id/btnPlayer1" />
+
+    <Button
+        android:id="@+id/btnPlayer3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@color/colorPlayed"
+        android:text="3"
+        app:layout_constraintStart_toEndOf="@+id/btnPlayer2"
+        app:layout_constraintTop_toTopOf="@+id/btnPlayer1" />
+
+    <Button
+        android:id="@+id/btnPlayer4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@color/colorPlayed"
+        android:text="4"
+        app:layout_constraintStart_toEndOf="@+id/btnPlayer3"
+        app:layout_constraintTop_toTopOf="@+id/btnPlayer1" />
+
+    <Button
+        android:id="@+id/btnPlayer9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorPlayed"
+        android:text="9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnPlayer5" />
+
+    <Button
+        android:id="@+id/btnPlayer10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@color/colorPlayed"
+        android:text="10"
+        app:layout_constraintStart_toEndOf="@+id/btnPlayer9"
+        app:layout_constraintTop_toTopOf="@+id/btnPlayer9" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewTeam"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:onClick="onBtnAddMember"
-        android:text="Add"
-        app:layout_constraintEnd_toStartOf="@+id/recylerViewTeam"
-        app:layout_constraintHorizontal_weight="25"
-        app:layout_constraintStart_toEndOf="@+id/textView5"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnPlayer13" />
 
 </android.support.constraint.ConstraintLayout>

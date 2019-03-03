@@ -5,4 +5,7 @@
     <color name="colorAccent">#D81B60</color>
     <color name="colorNotPlayed">#33691e</color>
     <color name="colorPlayed">#bf360c</color>
+
+    <color name="colorOnTeam">#29b6f6</color>
+    <color name="colorNotTeam">#757575</color>
 </resources>
