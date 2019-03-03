@@ -58,7 +58,7 @@ public class IngameActivity extends AppCompatActivity
             if (i < playerNameList.size()) {
                 player_name = playerNameList.get(i);
             } else {
-                player_name = "Player " + Integer.toString(i);
+                player_name = "Player NOT FOUND";
             }
 
             PlayerCardFragment new_fragment = PlayerCardFragment.newInstance(i, player_name);

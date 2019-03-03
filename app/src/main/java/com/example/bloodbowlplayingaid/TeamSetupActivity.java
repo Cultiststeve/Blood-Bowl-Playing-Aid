@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class TeamSetupActivity extends AppCompatActivity {
@@ -97,6 +99,15 @@ public class TeamSetupActivity extends AppCompatActivity {
     }
 
     public void onBtnPlayGame(View view){
+        //Check 11 players on field to start game
+        if (teamList.size() >11){
+            Toast.makeText(this, "Team is too large, cannot start a game", Toast.LENGTH_SHORT).show();
+            return;
+        } else if (teamList.size() < 11) {
+            Toast.makeText(this, "Team is too small, cannot start a game", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         Intent intent = new Intent(this, IngameActivity.class);
         intent.putStringArrayListExtra(extraPlayerList, teamList);
         startActivity(intent);
@@ -105,7 +116,21 @@ public class TeamSetupActivity extends AppCompatActivity {
 
     public void addPlayerToList(String player){
         teamList.add(player);
-        mAdapterTeam.notifyItemInserted(teamList.size());
+        Collections.sort(teamList, new Comparator<String>() {
+            @Override
+            public int compare(String s1, String s2) {
+                String s1PlayerNumText = s1.replace("Player ", "");
+                String s2PlayerNumText = s2.replace("Player ", "");
+                Log.d(TAG, "compare: Val1 / val2:" + s1PlayerNumText + " : " + s2PlayerNumText);
+                Integer s1_int = Integer.parseInt(s1PlayerNumText);
+                Integer s2_int = Integer.parseInt(s2PlayerNumText);
+                Log.d(TAG, "compare: s1/s2: " + s1_int + " : " + s2_int);
+                return (s1_int-s2_int);
+//                return 0;
+            }
+        });
+        //Sort list
+        mAdapterTeam.notifyDataSetChanged(); // All data could have changed if sorted
     }
 
     public void removePlayerFromList(String player){
