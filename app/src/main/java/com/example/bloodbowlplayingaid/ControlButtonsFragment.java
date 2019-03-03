@@ -138,10 +138,11 @@ public class ControlButtonsFragment extends Fragment {
         });
 
         ImageButton ibtnCloseCurrentGame = getView().findViewById(R.id.btnCloseGame);
-        ibtnCloseCurrentGame.setOnClickListener(new View.OnClickListener() {
+        ibtnCloseCurrentGame.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public void onClick(View v) {
+            public boolean onLongClick(View v) {
                 mListener.closeIngame();
+                return true;
             }
         });
 
