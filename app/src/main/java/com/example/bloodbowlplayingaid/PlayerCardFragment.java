@@ -25,15 +25,16 @@ public class PlayerCardFragment extends Fragment {
     private static final String ARG_CARD_POSITION = "CARD_POSITION";
     private static final String ARG_PLAYER_NAME = "PLAYER_NAME";
 
-    private Button cardButton;
+    private Button btnPlayer;
+    private Button btnCasualty;
 
-    // TODO: Rename and change types of parameters
     private Integer cardPostion;
     private String playerName;
+    private boolean casualty = false;
+    public Boolean hasPlayed = false;
 
     private OnFragmentInteractionListener mListener;
 
-    public Boolean hasPlayed = false;
 
     public PlayerCardFragment() {
         // Required empty public constructor
@@ -78,11 +79,12 @@ public class PlayerCardFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_player_card, container, false);
 
-        cardButton = rootView.findViewById(R.id.card_button); // Get button, store in fragment variable
+        btnPlayer = (Button) rootView.findViewById(R.id.btnPlayerCard); // Get button, store in fragment variable
+        btnCasualty = (Button) rootView.findViewById(R.id.btnCasualty);
 
         if (cardPostion != null){
             Integer display_num  = cardPostion +1;
-            cardButton.setText(playerName);
+            btnPlayer.setText(playerName);
             Log.d(TAG, "onCreateView: cardnum = " + cardPostion.toString());
         } else {
             Log.d(TAG, "onCreateView: Card num is null");
@@ -96,7 +98,7 @@ public class PlayerCardFragment extends Fragment {
         Log.d(TAG, "onStart() called");
         super.onStart();
 
-        cardButton.setOnClickListener(new View.OnClickListener() { // Set button behaviour
+        btnPlayer.setOnClickListener(new View.OnClickListener() { // Set button behaviour
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick() called with: v = [" + v + "]");
@@ -104,12 +106,39 @@ public class PlayerCardFragment extends Fragment {
                     Toast.makeText(getContext(), "Player has already played", Toast.LENGTH_SHORT).show();
                 } else {
                     hasPlayed = true;
-                    cardButton.setBackgroundColor(getResources().getColor(R.color.colorPlayed));
+                    btnPlayer.setBackgroundColor(getResources().getColor(R.color.colorPlayed));
                 }
             }
         });
 
-        //TODO long press to make not played
+        btnPlayer.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                hasPlayed = false;
+                btnPlayer.setBackgroundColor(getResources().getColor(R.color.colorNotPlayed));
+                return true;
+            }
+        });
+
+        btnCasualty.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: Casualty clicked, currently " + casualty);
+                if (casualty){
+                    casualty = false;
+                    if (hasPlayed){
+                        btnPlayer.setBackgroundColor(getResources().getColor(R.color.colorPlayed));
+                    } else {
+                        btnPlayer.setBackgroundColor(getResources().getColor(R.color.colorNotPlayed));
+                    }
+                } else {
+                    casualty = true;
+                    btnPlayer.setBackgroundColor(getResources().getColor(R.color.colorPlayerCasuallty));
+                }
+                btnPlayer.setEnabled(!casualty); //Not clickable if casualty
+            }
+        });
+
     }
 
     @Override
@@ -144,9 +173,15 @@ public class PlayerCardFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
+    public void onBtnCasualty(View view){
+
+    }
+
     public void newTurn(){
         //Reset color
         hasPlayed = false;
-        cardButton.setBackgroundColor(getResources().getColor(R.color.colorNotPlayed));
+        if (!casualty){ // Only reset color if not a casualty
+            btnPlayer.setBackgroundColor(getResources().getColor(R.color.colorNotPlayed));
+        }
     }
 }

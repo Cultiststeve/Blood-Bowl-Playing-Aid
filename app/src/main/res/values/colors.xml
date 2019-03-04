@@ -8,4 +8,5 @@
 
     <color name="colorOnTeam">#29b6f6</color>
     <color name="colorNotTeam">#757575</color>
+    <color name="colorPlayerCasuallty">#757575</color>
 </resources>

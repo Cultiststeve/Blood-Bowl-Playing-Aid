@@ -82,7 +82,7 @@ public class ControlButtonsFragment extends Fragment {
         super.onStart();
 
         //Setup buttons
-        final Button btnReroll = getView().findViewById(R.id.btnReroll);
+        final Button btnReroll = (Button) getView().findViewById(R.id.btnReroll);
         btnReroll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,7 +97,7 @@ public class ControlButtonsFragment extends Fragment {
             }
         });
 
-        final Button btnTouchdown = getView().findViewById(R.id.btnTouchdown);
+        final Button btnTouchdown = (Button) getView().findViewById(R.id.btnTouchdown);
         btnTouchdown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,7 +113,7 @@ public class ControlButtonsFragment extends Fragment {
             }
         });
 
-        final Button btnTurnCount = getView().findViewById(R.id.btnTurnCount);
+        final Button btnTurnCount = (Button) getView().findViewById(R.id.btnTurnCount);
         btnTurnCount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,7 +129,7 @@ public class ControlButtonsFragment extends Fragment {
             }
         });
 
-        ImageButton ibtnCloseCurrentGame = getView().findViewById(R.id.btnCloseGame);
+        ImageButton ibtnCloseCurrentGame = (ImageButton) getView().findViewById(R.id.btnCloseGame);
         ibtnCloseCurrentGame.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -138,7 +138,7 @@ public class ControlButtonsFragment extends Fragment {
             }
         });
 
-        final ImageButton btnResetGame = getView().findViewById(R.id.btnResetGame);
+        final ImageButton btnResetGame = (ImageButton) getView().findViewById(R.id.btnResetGame);
         btnResetGame.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -187,9 +187,9 @@ public class ControlButtonsFragment extends Fragment {
     }
 
     public void updateGameData(Integer currentTurn, Integer currentRerolls, Integer currentTouchdowns){
-        final Button btnTurnCount = getView().findViewById(R.id.btnTurnCount);
-        final Button btnReroll = getView().findViewById(R.id.btnReroll);
-        final Button btnTouchdown = getView().findViewById(R.id.btnTouchdown);
+        final Button btnTurnCount = (Button) getView().findViewById(R.id.btnTurnCount);
+        final Button btnReroll = (Button) getView().findViewById(R.id.btnReroll);
+        final Button btnTouchdown = (Button) getView().findViewById(R.id.btnTouchdown);
         btnTurnCount.setText(currentTurn.toString());
         btnReroll.setText(currentRerolls.toString());
         btnTouchdown.setText(currentTouchdowns.toString());
@@ -198,8 +198,8 @@ public class ControlButtonsFragment extends Fragment {
 
 
     public void updateHalfText(Integer currentTurn){
-        final Button btnTurnCount = getView().findViewById(R.id.btnTurnCount);
-        final TextView textView = getView().findViewById(R.id.txt_Game_Half);
+        final Button btnTurnCount = (Button) getView().findViewById(R.id.btnTurnCount);
+        final TextView textView = (TextView) getView().findViewById(R.id.txt_Game_Half);
 
         if (currentTurn > 8){
             //Second Half
