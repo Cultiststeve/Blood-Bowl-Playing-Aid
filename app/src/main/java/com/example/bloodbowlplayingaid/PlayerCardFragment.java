@@ -184,4 +184,10 @@ public class PlayerCardFragment extends Fragment {
             btnPlayer.setBackgroundColor(getResources().getColor(R.color.colorNotPlayed));
         }
     }
+
+    public void resetCard(){
+        hasPlayed = false;
+        casualty = false;
+        btnPlayer.setBackgroundColor(getResources().getColor(R.color.colorNotPlayed));
+    }
 }

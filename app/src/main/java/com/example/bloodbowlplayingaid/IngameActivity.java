@@ -132,6 +132,11 @@ public class IngameActivity extends AppCompatActivity
                 dataGameState.getCurrentRerolls(),
                 dataGameState.getCurrentTouchdowns());
 
+        //For each player card, reset color and state
+        for(int i=0; i<player_card_fragments.size(); i++){
+            player_card_fragments.get(i).resetCard();
+        }
+
     }
 
     @Override
