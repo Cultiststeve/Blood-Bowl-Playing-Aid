@@ -198,13 +198,18 @@ public class ControlButtonsFragment extends Fragment {
 
 
     public void updateHalfText(Integer currentTurn){
+        Log.d(TAG, "updateHalfText() called with: currentTurn = [" + currentTurn + "]");
         final Button btnTurnCount = getView().findViewById(R.id.btnTurnCount);
         final TextView textView = getView().findViewById(R.id.txt_Game_Half);
 
         if (currentTurn > 8){
             //Second Half
             textView.setText("Second Half");
-            btnTurnCount.setText(currentTurn%8);
+            if (currentTurn==16){
+                btnTurnCount.setText(Integer.toString(8));
+            } else {
+                btnTurnCount.setText(Integer.toString(currentTurn%8));
+            }
         } else {
             textView.setText("First Half");
         }
